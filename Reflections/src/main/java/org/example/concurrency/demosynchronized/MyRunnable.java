@@ -1,4 +1,4 @@
-package org.example.concurrency;
+package org.example.concurrency.demosynchronized;
 
 public class MyRunnable implements Runnable{
     private String name;

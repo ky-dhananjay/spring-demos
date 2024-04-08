@@ -1,12 +1,12 @@
-package org.example.concurrency;
+package org.example.concurrency.demosynchronized;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class IntStore {
+public class IntStoreThreadSafe {
     private int x = 0;
 
-    public synchronized void incr(){
-        x++;
+    public void incr(){
+            x++;
     }
 
     public int getX() {

@@ -1,4 +1,4 @@
-package org.example.concurrency;
+package org.example.concurrency.demosynchronized;
 
 public class Worker implements Runnable{
     private final IntStore store;
