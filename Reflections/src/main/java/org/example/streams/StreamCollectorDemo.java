@@ -6,7 +6,7 @@ import java.util.stream.*;
 
 import static java.util.stream.Collectors.mapping;
 
-public class Streams {
+public class StreamCollectorDemo {
     public static void main(String[] args) {
         System.out.println(groupingByWeight());
     }
@@ -29,12 +29,12 @@ public class Streams {
         return list.stream().collect(Collectors.groupingBy(Employee::getSalary));
     }
     public static List<String> sortStrings(){
-        List<String> list = List.of("tandrima", "tindy", "bubbly", "bunty", "dj");
+        List<String> list = List.of("bunty", "dj");
         // sorted :: Sort a list of strings in reverse alphabetical order.
         return list.stream().sorted().collect(Collectors.toList());
     }
     public static List<String> sortStrings_reverse(){
-        List<String> list = List.of("tandrima", "tindy", "bubbly", "bunty", "dj");
+        List<String> list = List.of("bunty", "dj");
         // Sort a list of strings in reverse alphabetical order.
         return list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
     }

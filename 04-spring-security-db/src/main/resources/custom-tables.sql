@@ -1,7 +1,7 @@
 drop table if exists `roles`;
 drop table if exists `members`;
 
-create table `members`(
+create table `user`(
     user_id varchar(50) not null,
     pw char(68) not null,
     active tinyint not null,
