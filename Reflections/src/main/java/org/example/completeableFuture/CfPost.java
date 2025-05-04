@@ -33,13 +33,11 @@ public class CfPost {
             cfUtil.getHttpClient(DUMMY_JSON_POST_URL);
         return response
             .thenApply(httpResponse -> {
-                List<DummyJsonPost> userList = null;
                 try {
-                    userList =
-                        objectMapper.readValue(httpResponse.body(), new TypeReference<List<DummyJsonPost>>() {
-                        });
-                    return userList;
+                    DjPostResponse djPostResponse = objectMapper.readValue(httpResponse.body(),  new TypeReference<>(){});
+                    return djPostResponse.getPosts();
                 } catch (JsonProcessingException e) {
+                    LOG.error(e.getMessage(), e);
                     throw new RuntimeException(e);
                 }
             });

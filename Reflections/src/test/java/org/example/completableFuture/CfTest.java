@@ -12,12 +12,15 @@ import org.example.completeableFuture.model.dummyjson.DummyJsonUser;
 import org.example.completeableFuture.model.dummyjson.dto.DjUserPostAndCartDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 public class CfTest {
     private CfUtil cfUtil;
@@ -38,28 +41,68 @@ public class CfTest {
     }
 
     @Test
-    public void testGetUserPostAndProducts(){
-        int userId = 1;
-        DummyJsonUser dummyJsonUser = new DummyJsonUser();
-        List<DummyJsonCart> cartItems = new ArrayList<>();
-        List<DummyJsonPost> postItems = new ArrayList<>();
+    public void testGetUserPostAndProducts_userCount1(){
+        int userId = 6;
+        DjUserPostAndCartDto userPostAndCartDto = new DjUserPostAndCartDto();
         CompletableFuture<Void> cfUserDtls = cfUser.getUserAsync(userId)
-            .thenAccept(user -> dummyJsonUser.setId(user.getId()));
+            .thenAccept(userPostAndCartDto::setUser);
         CompletableFuture<Void> cfCartDtls = cfCart.getCartByUserId(userId)
-            .thenAccept(items -> {
-                _log.info("Received: " + items);
-                cartItems.addAll(items);
-            });
+            .thenAccept(userPostAndCartDto::setCarts);
         CompletableFuture<Void> cfPostDtls = cfPost.getPostByUserId(userId)
-            .thenAccept(items -> {
-                _log.info("Received: " + items);
-                postItems.addAll(items);
-            });
+            .thenAccept(userPostAndCartDto::setPosts);
         CompletableFuture.allOf(cfUserDtls, cfPostDtls, cfCartDtls)
             .thenAccept(ignore -> {
-                _log.info(String.valueOf(dummyJsonUser));
-                _log.info(cartItems.toString());
-                _log.info(postItems.toString());
+                _log.info(String.valueOf(userPostAndCartDto));
             });
     }
+    @Test
+    public void testGetUserPostAndProducts_multiuser_approach1(){
+        List<Integer> userIds = List.of(1,2,3,6);
+        List<DjUserPostAndCartDto> results = new CopyOnWriteArrayList<>();
+        var cf =
+        userIds
+            .stream()
+            .map(userId -> buildUserPostAndCartDetails(results, userId))
+            .toList();
+        CompletableFuture.allOf(cf.toArray(new CompletableFuture[0]))
+            .thenAccept(ignore -> {
+                Assert.assertEquals(results.size(), userIds.size(), "results size should be equal to userIds");
+            });
+    }
+
+    private CompletableFuture<Void> buildUserPostAndCartDetails(List<DjUserPostAndCartDto> results, int userId){
+        DjUserPostAndCartDto userPostAndCartDto = new DjUserPostAndCartDto();
+        CompletableFuture<Void> cfUserDtls = cfUser.getUserAsync(userId)
+            .thenAccept(userPostAndCartDto::setUser);
+        CompletableFuture<Void> cfCartDtls = cfCart.getCartByUserId(userId)
+            .thenAccept(userPostAndCartDto::setCarts);
+        CompletableFuture<Void> cfPostDtls = cfPost.getPostByUserId(userId)
+            .thenAccept(userPostAndCartDto::setPosts);
+        return CompletableFuture.allOf(cfUserDtls, cfPostDtls, cfCartDtls)
+            .thenAccept(ignore -> results.add(userPostAndCartDto));
+    }
+
+    @Test
+    public void testGetUserPostAndProducts_multiuser_approach2(){
+        List<Integer> userIds = List.of(1,2,3,6);
+        List<DjUserPostAndCartDto> results = new CopyOnWriteArrayList<>();
+        List<CompletableFuture<Void>> allFutures = new ArrayList<>();
+            userIds
+                .forEach(userId -> {
+                    DjUserPostAndCartDto djUserPostAndCartDto = new DjUserPostAndCartDto();
+                    allFutures.add(cfUser.getUserAsync(userId)
+                        .thenAccept(djUserPostAndCartDto::setUser));
+                    allFutures.add(cfPost.getPostByUserId(userId)
+                        .thenAccept(djUserPostAndCartDto::setPosts));
+                    allFutures.add(cfCart.getCartByUserId(userId)
+                        .thenAccept(djUserPostAndCartDto::setCarts));
+                    results.add(djUserPostAndCartDto);
+                });
+        CompletableFuture.allOf(allFutures.toArray(new CompletableFuture[0]))
+            .thenAccept(ignore -> {
+                Assert.assertEquals(results.size(), userIds.size(), "results size should be equal to userIds");
+                _log.info(results.toString());
+            });
+    }
+
 }
