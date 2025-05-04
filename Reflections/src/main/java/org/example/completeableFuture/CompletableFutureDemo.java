@@ -3,7 +3,7 @@ package org.example.completeableFuture;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.completeableFuture.model.Post;
+import org.example.completeableFuture.model.dummyjson.DummyJsonPost;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,45 +16,16 @@ import java.util.concurrent.Executors;
 
 public class CompletableFutureDemo {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+
 
     public static void main(String[] args) throws InterruptedException {
 
     }
-    public CompletableFuture<HttpResponse<String>> getHttpClient(String uri) {
-        HttpRequest request = HttpRequest
-            .newBuilder()
-            .uri(URI.create(uri))
-            .GET()
-            .build();
-        try (HttpClient client = HttpClient.newBuilder().build()) {
-            return client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-        }
-    }
 
-    public CompletableFuture<List<Post>> getUsersAsync() {
-        CompletableFuture<HttpResponse<String>> response =
-            getHttpClient("https://dummyjson.com/users");
-        return response
-            .thenCompose(httpResponse -> {
-                List<Post> postList = null;
-                try {
-                    postList =
-                        objectMapper.readValue(httpResponse.body(), new TypeReference<List<Post>>() {
-                        });
-                    return postList;
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-                return postList;
-            });
-    }
 
-    public CompletableFuture<?> getPostByUserAsync(String userId) {
 
-            getHttpClient("https://dummyjson.com/posts/user/" + userId);
-         return
-    }
+
+
 
     public static void demoDummyMethod(){
         System.out.println("main thread execution started....");

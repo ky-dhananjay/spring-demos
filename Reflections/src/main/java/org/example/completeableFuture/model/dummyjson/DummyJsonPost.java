@@ -1,17 +1,16 @@
-package org.example.completeableFuture.model;
+package org.example.completeableFuture.model.dummyjson;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class Post {
+public class DummyJsonPost {
     int id;
     String title;
     String body;
     List<String> tags;
-    Reaction reactions;
+    DummyJsonReaction reactions;
     int views;
     int userId;
-
 }
