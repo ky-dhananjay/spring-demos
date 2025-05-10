@@ -55,4 +55,9 @@ public class EqualsAndHashCodeDemo {
         System.out.println(map.get(s3.getId()));
 
     }
+    /**
+     * hashcode method is basically used by hash based collections like HashSet and HashMap
+     * hence to let HashSet and HashMap function properly, while overriding equals method,
+     * hashcode method also needs to be overridden
+     */
 }
