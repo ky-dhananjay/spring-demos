@@ -13,7 +13,7 @@
 **/restart-required.txt
 
 # Maven target
-/target/
+*/target/*
 /pom.xml.tag
 
 # Intellij Idea
