@@ -1,0 +1,58 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Spring temporary files
+**/restart-required.txt
+
+# Maven target
+/target/
+/pom.xml.tag
+
+# Intellij Idea
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/
+/build/
+
+# Gradle
+.gradle
+/build/
+
+#STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+sts4-cache
+
+# Temporary files
+tmp/
+*.tmp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
