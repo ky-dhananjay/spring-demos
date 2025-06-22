@@ -1,7 +1,7 @@
-package org.example.springapp.repository;
+package my.examples.repository;
 
 import jakarta.persistence.EntityManager;
-import org.example.springapp.model.entity.Course;
+import my.examples.model.entity.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

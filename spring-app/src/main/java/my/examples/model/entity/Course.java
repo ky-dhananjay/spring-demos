@@ -1,4 +1,4 @@
-package org.example.springapp.model.entity;
+package my.examples.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
