@@ -1,14 +1,24 @@
 package org.example.streams;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.*;
 import java.util.stream.*;
 
 import static java.util.stream.Collectors.mapping;
 
 public class StreamCollectorDemo {
-    public static void main(String[] args) {
-        System.out.println(groupingByWeight());
+    public static void main(String[] args) throws InterruptedException {
+        AtomicInteger counter = new AtomicInteger(0);
+        IntStream.range(0,2)
+            .forEach(i -> {
+                new Thread(() -> {
+                    while (counter.getAndIncrement() < 5){
+                        System.out.println(Thread.currentThread().getName() + "hello");
+                    }
+                }).start();
+            });
+        Thread.sleep(5000);
     }
     public static Map<String, List<String>> groupingByWeight(){
         List<Employee> list = Employee.getAllEmployees();
@@ -22,6 +32,16 @@ public class StreamCollectorDemo {
             return "C";
         };
         return list.stream().collect(Collectors.groupingBy(classifier, mapping(Employee :: getFirstName , Collectors.toList())));
+//        Collectors.toList();
+//        Collectors.toCollection();
+//        Collectors.toMap();
+//        Collectors.toConcurrentMap();
+//        Collectors.toSet();
+//        Collectors.toUnmodifiableList();
+//        Collectors.toUnmodifiableMap();
+//        Collectors.toUnmodifiableSet();
+//        Collectors.groupingBy();
+//        Collectors.groupingByConcurrent();
     }
     public static Map<Integer, List<Employee>> groupingBySalary(){
         // Group a list of employee by their salary.

@@ -8,18 +8,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class AopDemo {
-    public static void main(String[] args) {
-        SpringApplication.run(AopDemo.class, args);
-    }
-    @Bean
-    public CommandLineRunner commandLineRunner(IAccountDao accountDao){
-        return runner -> {
-            // demoTheBeforeAdvice(accountDao);
-            demoTheAfterReturningAdvice(accountDao);
-        };
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(AopDemo.class, args);
+//    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(IAccountDao accountDao){
+//        return runner -> {
+//            // demoTheBeforeAdvice(accountDao);
+//            demoTheAfterReturningAdvice(accountDao);
+//        };
+//    }
     // @Before
     private void demoTheBeforeAdvice(IAccountDao accountDao) {
         accountDao.addAccount();
@@ -28,6 +28,6 @@ public class AopDemo {
     private void demoTheAfterReturningAdvice(IAccountDao accountDao) {
         accountDao.findAccounts();
     }
-
+//
 
 }

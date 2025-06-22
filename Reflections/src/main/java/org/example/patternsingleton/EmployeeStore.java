@@ -10,7 +10,7 @@ public class EmployeeStore {
     private EmployeeStore(){
         this.employees = new HashMap<>();
         this.employees.put("101", "dj");
-        this.employees.put("102", "tindy");
+        this.employees.put("102", "dy");
     }
 
     public String getName(String id){

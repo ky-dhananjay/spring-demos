@@ -11,15 +11,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
     public static void calculateSum(int a, int b){
         System.out.println(a + b);
     }

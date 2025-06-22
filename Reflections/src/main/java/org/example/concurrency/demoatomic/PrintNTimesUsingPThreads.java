@@ -9,11 +9,11 @@ public class PrintNTimesUsingPThreads {
 //        ThreadSafeCounter threadSafeCounter = new ThreadSafeCounter();
 //        Counter counter = new Counter();
         AtomicInteger counter = new AtomicInteger(0);;
-        IntStream.range(0,5)
+        IntStream.range(0,2)
             .forEach(i -> {
                 new Thread(() -> {
                     while(counter.getAndIncrement() < 5){
-                        System.out.println("Hello");
+                        System.out.println(Thread.currentThread().getName() + "Hello");
                     }
                 }).start();
             });

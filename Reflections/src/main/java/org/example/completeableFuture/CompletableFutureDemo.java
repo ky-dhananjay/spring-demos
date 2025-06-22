@@ -19,7 +19,23 @@ public class CompletableFutureDemo {
 
 
     public static void main(String[] args) throws InterruptedException {
-
+        CompletableFuture<?> answer = CompletableFuture.supplyAsync(() -> {
+            try{
+                Thread.sleep(1);
+            } catch (InterruptedException ie){
+                System.out.println(ie);
+            }
+            return "hello from future";
+        });
+        answer
+            .handle((ans, err) -> {
+                if(err != null){
+                    System.out.println(err);
+                } else {
+                    System.out.println(ans);
+                }
+                return null;
+            });
     }
 
 
