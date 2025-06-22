@@ -1,10 +1,6 @@
 package org.example;
 
 import org.example.reflections.Person;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;

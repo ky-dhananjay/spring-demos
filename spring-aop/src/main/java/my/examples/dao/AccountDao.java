@@ -1,6 +1,6 @@
-package org.example.aop.dao;
+package my.examples.dao;
 
-import org.example.aop.model.Account;
+import my.examples.model.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class AccountDao implements IAccountDao{
     @Override
     public List<Account> findAccounts() {
         return List.of(new Account("John", "Silver"),
-            new Account("Tindy", "Silver"),
+            new Account("dy", "Silver"),
             new Account("Dj", "Silver"));
     }
 }

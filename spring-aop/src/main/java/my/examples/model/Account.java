@@ -1,4 +1,4 @@
-package org.example.aop.model;
+package my.examples.model;
 
 public class Account {
     private String name;

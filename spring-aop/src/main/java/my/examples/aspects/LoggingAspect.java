@@ -1,11 +1,11 @@
-package org.example.aop.aspects;
+package my.examples.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.example.aop.model.Account;
+import my.examples.model.Account;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +21,13 @@ public class LoggingAspect {
      */
     // declaration of a pointcut
     // create a pointcut for all methods in dao package
-    @Pointcut("execution(* org.example.aop.dao.*.*(..))")
+    @Pointcut("execution(* my.examples.dao.*.*(..))")
     private void forDaoPackage(){};
     // create a pointcut for all getter methods in dao package
-    @Pointcut("execution(* org.example.aop.dao.*.get*(..))")
+    @Pointcut("execution(* my.examples.dao.*.get*(..))")
     private void getter(){};
     // create a pointcut for all setter methods in dao package
-    @Pointcut("execution(* org.example.aop.dao.*.set*(..))")
+    @Pointcut("execution(* my.examples.dao.*.set*(..))")
     private void setter(){};
 
     // create a pointcut to include all the methods in dao and exclude all the getters and setters

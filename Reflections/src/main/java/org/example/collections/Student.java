@@ -1,7 +1,5 @@
 package org.example.collections;
 
-import lombok.Data;
-
 import java.util.Objects;
 
 public class Student {

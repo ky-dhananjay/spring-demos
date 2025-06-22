@@ -1,4 +1,4 @@
-package org.example.aop.aspects;
+package my.examples.aspects;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;

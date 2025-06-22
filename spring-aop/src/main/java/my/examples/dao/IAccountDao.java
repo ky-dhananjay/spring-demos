@@ -1,6 +1,6 @@
-package org.example.aop.dao;
+package my.examples.dao;
 
-import org.example.aop.model.Account;
+import my.examples.model.Account;
 
 import java.util.List;
 

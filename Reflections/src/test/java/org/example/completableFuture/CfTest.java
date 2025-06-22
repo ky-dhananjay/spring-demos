@@ -5,9 +5,6 @@ import org.example.completeableFuture.CfPost;
 import org.example.completeableFuture.CfProduct;
 import org.example.completeableFuture.CfUser;
 import org.example.completeableFuture.CfUtil;
-import org.example.completeableFuture.model.dummyjson.DummyJsonCart;
-import org.example.completeableFuture.model.dummyjson.DummyJsonPost;
-import org.example.completeableFuture.model.dummyjson.DummyJsonUser;
 
 import org.example.completeableFuture.model.dummyjson.dto.DjUserPostAndCartDto;
 import org.slf4j.Logger;
@@ -20,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class CfTest {
     private CfUtil cfUtil;
